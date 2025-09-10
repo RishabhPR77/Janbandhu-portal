@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   DESIGN SYSTEM (HSL-only tokens)
+   =============================== */
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    --primary: 214 84% 56%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 174 72% 56%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 214 84% 56%;
+
+    /* Status colors (Node ops / civic dashboard) */
+    --status-pending: 43 96% 56%;
+    --status-forwarded: 214 84% 56%;
+    --status-resolved: 142 71% 45%;
+    --status-cancelled: 0 84% 60%;
+
+    /* Dashboard surfaces */
+    --dashboard-bg: 210 20% 98%;
+    --sidebar-bg: 0 0% 100%;
+    --navbar-bg: 0 0% 100%;
+    --success: 142 71% 45%;
+    --warning: 43 96% 56%;
+    --info: 214 84% 56%;
+
+    /* Gradients & shadows */
+    --gradient-primary: linear-gradient(135deg, hsl(214 84% 56%), hsl(174 72% 56%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
+
+    --shadow-card: 0 1px 3px 0 hsl(215 25% 27% / 0.10), 0 1px 2px 0 hsl(215 25% 27% / 0.06);
+    --shadow-elevated: 0 4px 6px -1px hsl(215 25% 27% / 0.10), 0 2px 4px -1px hsl(215 25% 27% / 0.06);
+
+    --radius: 0.75rem;
+
+    /* Sidebar system */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 215 28% 17%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 28% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 28% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 214 84% 56%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 25% 27%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 174 72% 56%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 25% 27%;
+    --input: 215 25% 27%;
+    --ring: 214 84% 56%;
+
+    /* Dark surfaces */
+    --dashboard-bg: 215 28% 17%;
+    --sidebar-bg: 215 25% 27%;
+    --navbar-bg: 215 25% 27%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100dvh;
+  }
+}
+
+/* ===============================
+   COMPONENTS (badges, cards, chips)
+   =============================== */
+@layer components {
+  /* Cards */
+  .card {
+    background: var(--gradient-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .card--elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Status badges for Node/civic states */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid hsl(var(--border));
+    line-height: 1;
+  }
+
+  .badge--pending {
+    background-color: hsl(var(--status-pending) / 0.12);
+    border-color: hsl(var(--status-pending) / 0.35);
+    color: hsl(var(--status-pending));
+  }
+  .badge--forwarded {
+    background-color: hsl(var(--status-forwarded) / 0.12);
+    border-color: hsl(var(--status-forwarded) / 0.35);
+    color: hsl(var(--status-forwarded));
+  }
+  .badge--resolved {
+    background-color: hsl(var(--status-resolved) / 0.12);
+    border-color: hsl(var(--status-resolved) / 0.35);
+    color: hsl(var(--status-resolved));
+  }
+  .badge--cancelled {
+    background-color: hsl(var(--status-cancelled) / 0.12);
+    border-color: hsl(var(--status-cancelled) / 0.35);
+    color: hsl(var(--status-cancelled));
+  }
+
+  /* Small chips for metrics like CPU, MEM, RPS, ERR% */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+    border: 1px solid hsl(var(--border));
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+}
+
+/* ===============================
+   UTILITIES / RESETS
+   =============================== */
+
+/* Remove Vite demo constraints so the dashboard can be full-bleed */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+}
+
+/* Optional helpers */
+.surface {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+
+.surface--inset {
+  background: linear-gradient(145deg, hsl(var(--background)), hsl(var(--muted)));
+}
+
+/* Smooth animated theme switch if you toggle `.dark` */
+html {
+  transition: color 150ms ease, background-color 150ms ease;
+}
